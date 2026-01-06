@@ -10,7 +10,9 @@
     "dev:frontend": "npm --prefix frontend run start",
     "dev": "npm run dev:dynamo && concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "deploy": "npm run build && npm --prefix infra run cdk -- bootstrap --profile desire-dev && npm --prefix infra run cdk -- synth --profile desire-dev && npm --prefix infra run cdk -- deploy --profile desire-dev",
-    "destroy": "npm --prefix infra run cdk -- destroy --profile desire-dev"
+    "destroy": "npm --prefix infra run cdk -- destroy --profile desire-dev",
+    "localstack:deploy": "bash scripts/localstack-deploy.sh",
+    "localstack:destroy": "bash scripts/localstack-destroy.sh"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
