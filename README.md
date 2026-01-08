@@ -23,15 +23,6 @@ Open the CloudFront URL and the frontend will call `/api/*` routed to Lambda.
 The deploy command runs `cdk bootstrap`, `cdk synth`, and `cdk deploy` using the
 AWS profile `desire-dev`.
 
-## Deploy to AWS
-```bash
-npm run setup
-npm run deploy
-```
-
-Make sure the AWS profile `desire-dev` is configured and has permissions to
-create CloudFormation stacks, Lambda, API Gateway, DynamoDB, S3, and CloudFront.
-
 ## Local development
 This uses DynamoDB Local in Docker, an Express API on port 3000, and Angular on port 4200.
 ```bash
@@ -46,6 +37,15 @@ docker compose down
 ```
 
 The API automatically creates a local `TodosLocal` table on startup.
+
+## Deploy to AWS
+```bash
+npm run setup
+npm run deploy
+```
+
+Make sure the AWS profile `desire-dev` is configured and has permissions to
+create CloudFormation stacks, Lambda, API Gateway, DynamoDB, S3, and CloudFront.
 
 ## API endpoints
 All endpoints are prefixed with `/api`.
@@ -66,13 +66,19 @@ This spins up LocalStack, builds the frontend, and deploys the same CDK stack to
 local AWS emulator.
 ```bash
 npm run setup
-npm run localstack:deploy
+LOCALSTACK_ENABLED=true npm run localstack:deploy
 ```
 
 To destroy the LocalStack stack:
 ```bash
-npm run localstack:destroy
+LOCALSTACK_ENABLED=true npm run localstack:destroy
 ```
+
+Prerequisites for LocalStack:
+- Docker
+- LocalStack CLI (for `cdklocal`): `pipx install localstack` or `pip install localstack`
+
+LocalStack commands are disabled by default. Set `LOCALSTACK_ENABLED=true` to run them.
 
 LocalStack defaults used by the scripts:
 - Account: `000000000000`
